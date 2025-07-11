@@ -1,0 +1,47 @@
+[
+  {
+    "suggested_route_id": "new_route_S1000",
+    "center_lat": 5.534172996945348,
+    "center_lon": -0.2354450188047539,
+    "estimated_demand": 21.142857142857142,
+    "peak_hour": "12",
+    "coverage_stops": 7,
+    "priority_score": 148.0
+  },
+  {
+    "suggested_route_id": "new_route_S1001",
+    "center_lat": 5.534839993003651,
+    "center_lon": -0.22886839547413426,
+    "estimated_demand": 21.333333333333332,
+    "peak_hour": "13",
+    "coverage_stops": 3,
+    "priority_score": 64.0
+  },
+  {
+    "suggested_route_id": "new_route_S100",
+    "center_lat": 5.53786939186633,
+    "center_lon": -0.4015263515101753,
+    "estimated_demand": 20.0,
+    "peak_hour": "14",
+    "coverage_stops": 3,
+    "priority_score": 60.0
+  },
+  {
+    "suggested_route_id": "new_route_S1003",
+    "center_lat": 5.538434277932282,
+    "center_lon": -0.2157882706576838,
+    "estimated_demand": 20.0,
+    "peak_hour": "10",
+    "coverage_stops": 2,
+    "priority_score": 40.0
+  },
+  {
+    "suggested_route_id": "new_route_S1007",
+    "center_lat": 5.546820575034986,
+    "center_lon": -0.21758069296092086,
+    "estimated_demand": 20.0,
+    "peak_hour": "15",
+    "coverage_stops": 1,
+    "priority_score": 20.0
+  }
+]

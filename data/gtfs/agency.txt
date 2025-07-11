@@ -1,0 +1,92 @@
+agency_id,agency_name,agency_url,agency_timezone
+0,NULL,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+1,Abeka Lapaz Circle Accra Local of Abeka Branch of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+2,Abeka Lapaz Highway (GPRTU),https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+3,Abeka Lapaz Madina Adenta (Novotel) Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+4,Abeka Trotro Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+5,Abeka-Lapaz Kaneshie Agbogbloshie Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+7,Abelemkpe Dzorwulu Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+9,Accra Arena - Total Zongo - Russia - Marteheko Branch of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+10,Accra CMB Branch  No. 2 of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+11,Accra Mamponse Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+13,Accra New Town (Novotel) Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+12,Accra New Town Timber Market Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+15,Accra Newtown - 37 - Burma Camp - Madina Branch,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+16,Accra No. 2 Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+17,Accra-Chorkor-Mamponse Taxi Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+18,Achimota - Lapaz Taxi & Hiring Branch of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+19,Achimota Co-operative Taxi Branch,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+20,Achimota Co-operative Transport Society Limited,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+21,Achimota GPRTU Main Branch,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+22,Achimota Haatso Kwashieman Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+25,Adabraka Co-operative Transport Society Limited,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+27,Alajo Trotro Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+29,Ayawaso Co-operative Transport Society Limited,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+30,Banana Inn Salaga Tema Station Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+31,Biakoye Taxi Union Branch of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+33,Bubuashie Trotro Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+32,Bubuashie-Atico-Circle Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+35,Chorkor Trotro Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+36,Dansoman Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+38,Dansoman Co-operative Transport Society,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+41,Darkuman - Accra Branch of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+42,East Legon Taxi Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+43,East Legon-La Bawaleshie-M-A-S-A  GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+45,Grace PROTOA,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+46,Grace PROTOA Lapaz Taxi,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+47,Hansonic Taxi Drivers Union,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+50,Kaneshie Honesty GPRTU Branch,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+51,Kaneshie No. 2 Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+55,Katamanto Zongo Trotro Drivers Union,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+56,Kokomlemle - Pig Farm - Dzorwulu - Abelemkpe Local of Pig Farm Branch.,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+57,Kotobabi Down Branch of G.P.R.T.U Of TUC,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+58,Kwashieman Brothers Branch Of PROTOA,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+59,Kwashieman Junction Co-operative Taxi (044),https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+23,Achimota No. 5 GPRTU Branch,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+26,Alajo Co-operative Transport Society,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+28,Asomdwe Taxi Local of Achimota Lapaz  Taxi & Hiring GPRTU Branch,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+44,East Legon-La Bawaleshie-M-A-S-A  GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+48,Kaneshie Circle Teshie Nungua Local of Odawna Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+52,Kaneshie Research Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+54,Kantamanto-Zongo Branch of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+60,Kwashieman Junction Trotro Co-operative Transport Society,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+61,Kwashieman Taxi Local of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+62,Kyere Wo Do Branch of PROTOA,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+63,La YMCA Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+64,Lapaz Asofan Amasaman Branch of G.P.R.T.U.,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+66,Lapaz No. Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+67,Lapaz No.2 Branch of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+68,Legon Co-operative Transport Society Limited,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+69,Lido Overhead Mallam Atta Local of Kotobabi Down Branch of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+70,Maamobi Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+71,New Tema Station-Agbogbloshie Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+74,Nima Maamobi Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+76,Nima Mamobi Circle Overhead Branch of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+77,Nkrumah Circle Peugeot Branch Of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+79,North Darkuman Nyamekye Branch Of G.P.R.T.U,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+80,North Kaneshie Co-operative Transport Society (Shared Taxi),https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+81,Odor Taxi Hiring Of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+82,Odorkor Branch Of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+83,Okaikwe Taxi Drivers Union,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+84,Okponglo Co-operative Transport Society,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+85,Orgle Street Post Office Local of Kaneshie Circle Trotro Branch,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+86,Osu Blow up Trotro of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+87,Osu Trotro Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+88,Rawlings Park Co-operative (009),https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+89,Royal Co-operative Transport Society Limited,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+90,Salaga Mamprobi Camara Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+91,St. Michael Co-operative Transport Society,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+92,Susubiribiri GPRTU Taxi,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+93,Tiger Transport Lapaz Amasaman Branch,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+95,Unity PROTOA Branch,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+96,Unregistered Peugoet Operators,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+98,Wisdom Co-operative Society (016),https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+99,Zambrama Line Nasrawa Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+100,Agbogbloshie Kasoa Nyanyano Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+101,Agbogbloshie Taxi & Mini Cargo,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+8,Accra - C.M.B - Darkuman Local of Lomnava Tantra Hill Alhaji GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+65,Lapaz Branch of Tiger Transport Services Association,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+72,Newtown Nima Maamobi Local (Ayawaso Taxi) GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+78,Nkwahia Co-operative Transport Society Limited,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+94,Lapaz Branch of Tiger Transport Services Association,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
+97,UTC- Circle Taxi Branch of GPRTU,https://en.wikipedia.org/wiki/Ghana_Private_Road_Transport_Union,Africa/Accra
