@@ -1,4 +1,3 @@
-// lib/screens/analytics_screen.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,46 +9,82 @@ class AnalyticsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<TransitProvider>(context);
-    final analytics = provider.analytics;
-    if (analytics == null) {
-      return const Center(child: CupertinoActivityIndicator());
-    }
+    final provider = Provider.of<TransitProvider>(context, listen: false);
 
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text("Analytics"),
-        backgroundColor: CupertinoColors.white,
+        middle: Text('Transit Analytics'),
       ),
       child: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            _buildAnalyticsCard(
-              icon: CupertinoIcons.bus,
-              title: "Total Routes",
-              value: analytics["total_routes"].toString(),
+        child: CustomScrollView(
+          slivers: [
+            CupertinoSliverRefreshControl(
+              onRefresh: () async {
+                await provider.loadAnalytics();
+              },
             ),
-            _buildAnalyticsCard(
-              icon: CupertinoIcons.location_solid,
-              title: "Total Stops",
-              value: analytics["total_stops"].toString(),
-            ),
-            _buildAnalyticsCard(
-              icon: CupertinoIcons.chart_bar,
-              title: "Avg Demand",
-              value: analytics["avg_demand"].toStringAsFixed(1),
-            ),
-            _buildAnalyticsCard(
-              icon: CupertinoIcons.clock,
-              title: "Peak Hours",
-              value: (analytics["peak_hours"] as List).join(', '),
-            ),
-            _buildAnalyticsCard(
-              icon: CupertinoIcons.lightbulb,
-              title: "Recommendations",
-              value: (analytics["recommendations"] as List).join('\n• '),
-              multiline: true,
+            SliverToBoxAdapter(
+              child: Consumer<TransitProvider>(
+                builder: (context, provider, _) {
+                  final analytics = provider.analytics;
+
+                  if (provider.isLoading && analytics == null) {
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 80),
+                        child: CupertinoActivityIndicator(radius: 16),
+                      ),
+                    );
+                  }
+
+                  if (analytics == null) {
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 80),
+                        child: Text(
+                          "Analytics data not available",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    );
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        _buildCard(
+                          title: 'Total Stops',
+                          value: analytics['total_stops'].toString(),
+                          icon: CupertinoIcons.location,
+                        ),
+                        _buildCard(
+                          title: 'Total Routes',
+                          value: analytics['total_routes'].toString(),
+                          icon: CupertinoIcons.bus,
+                        ),
+                        _buildCard(
+                          title: 'Average Demand',
+                          value: analytics['average_demand'].toStringAsFixed(1),
+                          icon: CupertinoIcons.chart_bar_alt_fill,
+                        ),
+                        _buildCard(
+                          title: 'High Demand Stops',
+                          value:
+                              (analytics['high_demand_stops'] as List<dynamic>)
+                                  .join(', '),
+                          icon: CupertinoIcons.flame_fill,
+                        ),
+                        _buildCard(
+                          title: 'Last Updated',
+                          value: analytics['last_updated'],
+                          icon: CupertinoIcons.time,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -57,48 +92,31 @@ class AnalyticsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAnalyticsCard({
-    required IconData icon,
+  Widget _buildCard({
     required String title,
     required String value,
-    bool multiline = false,
+    required IconData icon,
   }) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: CupertinoColors.systemGrey6,
-        borderRadius: BorderRadius.circular(12),
+        color: CupertinoColors.systemBackground,
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black12,
             blurRadius: 8,
             offset: const Offset(0, 4),
-          )
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment:
-            multiline ? CrossAxisAlignment.start : CrossAxisAlignment.center,
-        children: [
-          Icon(icon, size: 32, color: CupertinoColors.activeBlue),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title,
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 4),
-                Text(
-                  multiline ? "• $value" : value,
-                  style: const TextStyle(fontSize: 15),
-                ),
-              ],
-            ),
           ),
         ],
+      ),
+      child: ListTile(
+        leading: Icon(icon, color: CupertinoColors.activeBlue, size: 28),
+        title: Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(value),
       ),
     );
   }
