@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/transit_provider.dart';
-import 'screens/home_screen.dart';
+import 'screens/splash_screen.dart';
 
 void main() {
   runApp(const AccraTransitApp());
@@ -20,11 +20,13 @@ class AccraTransitApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Accra Transit Optimizer',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          colorSchemeSeed: Colors.blue,
+          brightness: Brightness.light,
           useMaterial3: true,
+          scaffoldBackgroundColor: Colors.grey[100],
         ),
-        home: HomeScreen(),
         debugShowCheckedModeBanner: false,
+        home: const SplashScreen(),
       ),
     );
   }

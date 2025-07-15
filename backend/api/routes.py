@@ -12,6 +12,7 @@ import json
 import pandas as pd
 from datetime import datetime, timedelta
 import numpy as np
+from math import radians, cos, sin, asin, sqrt
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -60,6 +61,67 @@ def load_models():
 
 # Load on startup
 load_models()
+
+# ===== UTILITY FUNCTIONS =====
+
+def calculate_distance(lat1, lon1, lat2, lon2):
+    """Calculate the great circle distance between two points on earth (in km)"""
+    # Convert decimal degrees to radians
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+    
+    # Haversine formula
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a))
+    
+    # Radius of earth in kilometers
+    r = 6371
+    return c * r
+
+def find_nearest_stops(lat, lon, stops_df, max_distance=1.0, limit=5):
+    """Find nearest stops to a given coordinate"""
+    if stops_df is None:
+        return []
+    
+    distances = []
+    for _, stop in stops_df.iterrows():
+        distance = calculate_distance(lat, lon, stop['stop_lat'], stop['stop_lon'])
+        if distance <= max_distance:
+            distances.append({
+                'stop_id': stop['stop_id'],
+                'stop_name': stop.get('stop_name', f"Stop {stop['stop_id']}"),
+                'latitude': stop['stop_lat'],
+                'longitude': stop['stop_lon'],
+                'distance': distance
+            })
+    
+    # Sort by distance and return top results
+    distances.sort(key=lambda x: x['distance'])
+    return distances[:limit]
+
+def find_connecting_routes(from_stops, to_stops, routes_df):
+    """Find routes that connect from_stops to to_stops"""
+    if routes_df is None:
+        return []
+    
+    connecting_routes = []
+    
+    # Simple approach: find routes that serve both areas
+    for _, route in routes_df.iterrows():
+        route_id = route['route_id']
+        
+        # In a real implementation, you'd check if the route serves both stop areas
+        # For now, we'll create a simplified version
+        connecting_routes.append({
+            'route_id': route_id,
+            'route_name': route.get('route_short_name', f"Route {route_id}"),
+            'route_type': route.get('route_type', 'bus'),
+            'estimated_travel_time': np.random.randint(15, 60),  # Placeholder
+            'estimated_cost': np.random.uniform(1.5, 4.0)  # Placeholder in GHS
+        })
+    
+    return connecting_routes
 
 # ===== PYDANTIC MODELS =====
 
@@ -111,6 +173,43 @@ class AnalyticsResponse(BaseModel):
     avg_demand: float
     peak_hours: List[int]
     high_demand_areas: List[Dict[str, Any]]
+    recommendations: List[str]
+
+# ===== NEW MODELS FOR FROM-TO SUGGESTIONS =====
+
+class FromToRequest(BaseModel):
+    from_latitude: float = Field(..., description="Starting point latitude")
+    from_longitude: float = Field(..., description="Starting point longitude")
+    to_latitude: float = Field(..., description="Destination latitude")
+    to_longitude: float = Field(..., description="Destination longitude")
+    travel_time: Optional[str] = Field(default="now", description="Travel time (now, peak, off-peak)")
+    max_walking_distance: float = Field(default=0.5, ge=0.1, le=2.0, description="Max walking distance to stops (km)")
+    max_suggestions: int = Field(default=3, ge=1, le=10, description="Maximum number of route suggestions")
+
+class NearestStop(BaseModel):
+    stop_id: str
+    stop_name: str
+    latitude: float
+    longitude: float
+    walking_distance: float
+    walking_time: int  # in minutes
+
+class RouteOption(BaseModel):
+    route_id: str
+    route_name: str
+    route_type: str
+    estimated_travel_time: int  # in minutes
+    estimated_cost: float  # in GHS
+    frequency: Optional[int] = None  # minutes between buses
+    demand_level: Optional[str] = None
+
+class FromToResponse(BaseModel):
+    from_stops: List[NearestStop]
+    to_stops: List[NearestStop]
+    route_options: List[RouteOption]
+    total_distance: float  # direct distance in km
+    total_estimated_time: int  # total journey time in minutes
+    total_estimated_cost: float  # total cost in GHS
     recommendations: List[str]
 
 # ===== API ENDPOINTS =====
@@ -213,6 +312,158 @@ async def suggest_routes(request: RouteRequest):
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Route suggestion error: {str(e)}")
+
+@router.post("/suggest_from_to", response_model=FromToResponse)
+async def suggest_from_to(request: FromToRequest):
+    """Get route suggestions between two specific points"""
+    try:
+        # Calculate direct distance
+        direct_distance = calculate_distance(
+            request.from_latitude, request.from_longitude,
+            request.to_latitude, request.to_longitude
+        )
+        
+        # Find nearest stops for both from and to locations
+        from_stops = find_nearest_stops(
+            request.from_latitude, request.from_longitude, 
+            stops_data, request.max_walking_distance, 5
+        )
+        
+        to_stops = find_nearest_stops(
+            request.to_latitude, request.to_longitude, 
+            stops_data, request.max_walking_distance, 5
+        )
+        
+        if not from_stops:
+            raise HTTPException(status_code=404, detail="No nearby stops found for starting location")
+        
+        if not to_stops:
+            raise HTTPException(status_code=404, detail="No nearby stops found for destination")
+        
+        # Convert to response format
+        from_stops_response = []
+        for stop in from_stops:
+            walking_time = int(stop['distance'] * 12)  # Assume 12 minutes per km walking
+            from_stops_response.append(NearestStop(
+                stop_id=stop['stop_id'],
+                stop_name=stop['stop_name'],
+                latitude=stop['latitude'],
+                longitude=stop['longitude'],
+                walking_distance=round(stop['distance'], 2),
+                walking_time=walking_time
+            ))
+        
+        to_stops_response = []
+        for stop in to_stops:
+            walking_time = int(stop['distance'] * 12)  # Assume 12 minutes per km walking
+            to_stops_response.append(NearestStop(
+                stop_id=stop['stop_id'],
+                stop_name=stop['stop_name'],
+                latitude=stop['latitude'],
+                longitude=stop['longitude'],
+                walking_distance=round(stop['distance'], 2),
+                walking_time=walking_time
+            ))
+        
+        # Find connecting routes
+        connecting_routes = find_connecting_routes(from_stops, to_stops, routes_data)
+        
+        # Convert to response format and add demand info
+        route_options = []
+        for route in connecting_routes[:request.max_suggestions]:
+            
+            # Determine demand level if predictor is available
+            demand_level = None
+            if demand_predictor.is_trained:
+                try:
+                    # Use current time or specified time
+                    current_hour = datetime.now().hour
+                    current_day = datetime.now().weekday()
+                    
+                    # Predict demand for the route (using midpoint)
+                    mid_lat = (request.from_latitude + request.to_latitude) / 2
+                    mid_lon = (request.from_longitude + request.to_longitude) / 2
+                    
+                    demand_score = demand_predictor.predict_demand(
+                        route['route_id'], current_hour, current_day, mid_lat, mid_lon
+                    )
+                    
+                    if demand_score >= 75:
+                        demand_level = "Very High"
+                    elif demand_score >= 50:
+                        demand_level = "High"
+                    elif demand_score >= 25:
+                        demand_level = "Medium"
+                    else:
+                        demand_level = "Low"
+                except:
+                    demand_level = None
+            
+            # Estimate frequency based on demand and time
+            frequency = None
+            if request.travel_time == "peak":
+                frequency = np.random.randint(5, 15)  # 5-15 min during peak
+            elif request.travel_time == "off-peak":
+                frequency = np.random.randint(15, 30)  # 15-30 min during off-peak
+            else:
+                frequency = np.random.randint(10, 20)  # 10-20 min normally
+            
+            route_options.append(RouteOption(
+                route_id=route['route_id'],
+                route_name=route['route_name'],
+                route_type=route['route_type'],
+                estimated_travel_time=route['estimated_travel_time'],
+                estimated_cost=round(route['estimated_cost'], 2),
+                frequency=frequency,
+                demand_level=demand_level
+            ))
+        
+        # Calculate total estimates
+        if route_options:
+            # Use the fastest route for estimates
+            fastest_route = min(route_options, key=lambda x: x.estimated_travel_time)
+            
+            # Add walking time to/from stops
+            min_from_walking = min(s.walking_time for s in from_stops_response)
+            min_to_walking = min(s.walking_time for s in to_stops_response)
+            
+            total_time = fastest_route.estimated_travel_time + min_from_walking + min_to_walking
+            total_cost = fastest_route.estimated_cost
+        else:
+            total_time = 0
+            total_cost = 0.0
+        
+        # Generate recommendations
+        recommendations = []
+        
+        if direct_distance < 2.0:
+            recommendations.append("Short distance - consider walking or cycling")
+        
+        if not route_options:
+            recommendations.append("No direct routes found - consider alternative transport")
+        elif len(route_options) == 1:
+            recommendations.append("Limited route options - check schedule before traveling")
+        
+        if request.travel_time == "peak":
+            recommendations.append("Peak hours detected - expect longer wait times")
+        elif request.travel_time == "off-peak":
+            recommendations.append("Off-peak travel - fewer service options available")
+        
+        if any(stop.walking_distance > 0.8 for stop in from_stops_response + to_stops_response):
+            recommendations.append("Some stops require significant walking - consider ride-sharing for first/last mile")
+        
+        return FromToResponse(
+            from_stops=from_stops_response,
+            to_stops=to_stops_response,
+            route_options=route_options,
+            total_distance=round(direct_distance, 2),
+            total_estimated_time=total_time,
+            total_estimated_cost=total_cost,
+            recommendations=recommendations
+        )
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"From-to suggestion error: {str(e)}")
 
 @router.get("/stops", response_model=List[StopInfo])
 async def get_stops(

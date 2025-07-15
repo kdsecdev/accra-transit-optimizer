@@ -1,7 +1,11 @@
+Great progress so far! Based on your upgraded Flutter frontend and hosted backend, here is an updated, professional `README.md` that reflects the full project scope with all recent improvements:
+
+---
+
 # 🚌 Accra Transit Optimizer
 
-**AI-powered transit optimization for Accra's public transport network (Trotros)**  
-Built with **Flutter frontend** + **FastAPI backend** + **ML route and demand prediction models**.
+**AI-powered transit optimization for Accra’s public transport (Trotros)**
+Built with a sleek **Flutter app** (Cupertino-style) + **FastAPI backend** + **ML models** for route and demand prediction.
 
 ---
 
@@ -12,133 +16,148 @@ accra-transit-optimizer/
 │
 ├── backend/                  # FastAPI backend
 │   ├── api/                  # API routes and logic
-│   ├── models/               # Trained ML models (demand predictor, route optimizer)
-│   ├── utils/                # GTFS and data processing tools
-│   ├── data/                 # GTFS data and processed datasets
-│   ├── main.py               # FastAPI app
-│   └── requirements.txt      # Python dependencies
+│   ├── models/               # Trained ML models
+│   ├── utils/                # GTFS & preprocessing
+│   ├── data/                 # GTFS data & generated features
+│   ├── main.py               # API entry point
+│   └── requirements.txt      # Python deps
 │
-├── frontend/                 # Flutter frontend
+├── frontend/                 # Flutter app
 │   ├── lib/
-│   │   ├── screens/          # UI screens (e.g., home_screen.dart)
-│   │   ├── services/         # API service (api_service.dart)
-│   │   ├── providers/        # App state logic (transit_provider.dart)
-│   │   └── main.dart         # Flutter entry point
-│   └── pubspec.yaml          # Flutter dependencies
+│   │   ├── screens/          # Main UI (home, analytics, routes)
+│   │   ├── services/         # API integration
+│   │   ├── providers/        # State management
+│   │   └── main.dart         # App entry point
+│   ├── pubspec.yaml
+│   └── assets/               # Branding, splash
 ```
 
 ---
 
 ## 🚀 Features
 
-✅ GTFS data processing  
-✅ ML-powered demand prediction  
-✅ Optimized route suggestions  
-✅ Live analytics dashboard  
-✅ Flutter map view with stops and routes  
-✅ Realtime GPS data support  
-✅ Cross-platform: Android, iOS, Web, Windows
+✅ GTFS stop parsing & mapping
+✅ ML demand prediction model
+✅ AI-suggested optimal routes
+✅ Dynamic analytics dashboard
+✅ Realtime GPS location detection
+✅ Sleek **Cupertino-inspired UI**
+✅ Auto-filled coordinates with override
+✅ Toast-based error handling
+✅ Hosted FastAPI backend (Render)
 
 ---
 
 ## 🧠 Tech Stack
 
-| Layer     | Technology                  |
-|-----------|-----------------------------|
-| Backend   | Python, FastAPI, Pandas, Scikit-learn, XGBoost |
-| Frontend  | Flutter, Provider, Flutter Map |
-| Mapping   | OpenStreetMap + OSMnx       |
-| ML Models | Demand prediction, Route optimization |
-| Data      | GTFS (Accra), GPS, synthetic data |
+| Layer     | Technology                             |
+| --------- | -------------------------------------- |
+| Backend   | FastAPI, Python, Scikit-learn, XGBoost |
+| Frontend  | Flutter 3.x (Cupertino), Provider      |
+| Mapping   | flutter\_map + OpenStreetMap           |
+| Data      | GTFS Accra 2016 + synthetic GPS        |
+| ML Models | Route optimization, demand prediction  |
 
 ---
 
-## ⚙️ Setup Instructions
+## 🔧 Setup Instructions
 
-### 🔹 Backend (FastAPI)
-
-> Requires Python 3.10 or 3.11 (avoid 3.12+)
+### ▶️ Backend (FastAPI)
 
 ```bash
 cd backend/
 python -m venv venv
-source venv/bin/activate      # On Windows: venv\Scripts\activate
-pip install --upgrade pip
+source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-- API Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
-- Health Check: `GET /health`
+* API: [http://localhost:8000/docs](http://localhost:8000/docs)
+* Health: `/health`
 
----
-
-### 🔹 Frontend (Flutter)
-
-> Requires Flutter 3.x. Use `flutter doctor` to confirm setup.
+### 📱 Frontend (Flutter)
 
 ```bash
 cd frontend/
-flutter create .              # Repairs missing platform folders (android/, web/, etc.)
 flutter pub get
-flutter run -d chrome         # Or use `-d android`, `-d windows`, etc.
+flutter run -d chrome       # Or `-d android`
 ```
 
 ---
 
-## 📡 API Overview
+## 📡 API Endpoints (Deployed on Render)
 
-- `POST /api/v1/predict_demand` → Predicts demand at a given stop and time  
-- `POST /api/v1/suggest_routes` → Returns optimized route suggestions  
-- `GET  /api/v1/stops`          → Returns stop data (with optional demand)  
-- `GET  /api/v1/analytics`      → High-level system analytics  
-- `POST /api/v1/submit_gps`     → Submit real-time GPS data  
+| Method | Endpoint                  | Description                      |
+| ------ | ------------------------- | -------------------------------- |
+| GET    | `/api/v1/stops`           | All stops (with optional demand) |
+| POST   | `/api/v1/predict_demand`  | Predict demand for stop & time   |
+| POST   | `/api/v1/suggest_routes`  | AI-optimized route suggestions   |
+| POST   | `/api/v1/suggest_from_to` | Suggest based on start → end     |
+| GET    | `/api/v1/analytics`       | Returns analytics summary        |
+| POST   | `/api/v1/submit_gps`      | Submit live GPS data             |
 
-Explore endpoints at `/docs`.
-
----
-
-## 📍 Map and Data Visualization
-
-- Uses `flutter_map` + `latlong2` to show:
-  - GTFS stops with markers
-  - Suggested routes and high-demand areas
-  - On-tap demand prediction UI
+📄 Docs: [https://accra-transit-optimizer.onrender.com/docs](https://accra-transit-optimizer.onrender.com/docs)
 
 ---
 
-## 🧪 Sample GTFS Dataset
+## ✨ App Highlights
 
-Ensure you place the 2016 Accra GTFS data in:
-```
-backend/data/gtfs/
-```
+* 📍 **GPS Location Detection**
+
+  * Auto-prefills coordinates
+  * Toasts: e.g., “Location Detected: 5.6, -0.18”
+
+* 🗺️ **Flutter Map UI**
+
+  * Displays GTFS stops & route markers
+  * Highlights viable paths with polylines
+
+* 📊 **Analytics Screen**
+
+  * Fetches live analytics from `/analytics`
+  * Stylish cards: peak hours, high-traffic stops, etc.
+
+* 🔄 **Route Suggestions**
+
+  * From start → end (user input or GPS)
+  * Filters: demand threshold & viability
 
 ---
 
-## 🛠️ TODOs & Enhancements
+## 💅 Design & UX
 
-- [ ] Live bus tracking via GPS feed
-- [ ] Authentication & admin dashboard
-- [ ] Deploy on Firebase + Render
-- [ ] Clustering of stops & demand heatmap
-- [ ] Schedule optimization using OR-Tools
+* 🍎 Cupertino-style (rounded, elegant)
+* 🧭 Responsive layouts
+* 🎨 Splash screen with minimal branding
+* 🔔 Toast feedback for all actions
 
 ---
 
-## 💡 Credits
+## 🔮 Future Enhancements
 
-- **Lead Developer**: [Caleb Botchway / DEVKD.]  
-- **Data**: [Accra GTFS, Synthetic GPS]  
-- **Frameworks**: FastAPI, Flutter, Scikit-learn, OSMnx, GTFS-Kit
+* 🔄 Live trotro tracking via real-time GPS
+* 🧠 Model auto-retraining
+* 📊 Admin dashboard (Web)
+* 🚏 Stop clustering & demand heatmaps
+* 📅 Schedule optimization (OR-Tools)
+
+---
+
+## 🙌 Credits
+
+* **Lead Developer**: \[Caleb Botchway / DEVKD.]
+* **Data Source**: 2016 Accra GTFS
+* **Frameworks**: Flutter, FastAPI, Scikit-learn, OSMnx, GTFS-Kit
 
 ---
 
 ## 📜 License
 
-MIT License.  
-Use freely, contribute responsibly.
+MIT License — free to use, modify & contribute.
 
 ---
 
-🚀 _"Optimizing Accra’s future, one route at a time!"_
+> 🚀 *Optimizing Accra’s future, one route at a time.*
+
+---
+

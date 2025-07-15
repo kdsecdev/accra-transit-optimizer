@@ -1,6 +1,7 @@
 // lib/providers/transit_provider.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../services/api_service.dart';
@@ -11,6 +12,7 @@ class TransitProvider extends ChangeNotifier {
   List<List<LatLng>> _routePolylines = [];
   Map<String, dynamic>? _currentDemand;
   Map<String, dynamic>? _analytics;
+  Map<String, dynamic>? _suggestedRoute;
   bool _isLoading = false;
   String? _error;
 
@@ -22,6 +24,7 @@ class TransitProvider extends ChangeNotifier {
   List<dynamic> get routeSuggestions => _filteredRouteSuggestions();
   Map<String, dynamic>? get currentDemand => _currentDemand;
   Map<String, dynamic>? get analytics => _analytics;
+  Map<String, dynamic>? get suggestedRoute => _suggestedRoute;
   bool get isLoading => _isLoading;
   String? get error => _error;
   String get viabilityFilter => _viabilityFilter;
@@ -30,29 +33,41 @@ class TransitProvider extends ChangeNotifier {
   List<Marker> get stopMarkers => _stops.map((stop) {
         return Marker(
           point: LatLng(stop['latitude'], stop['longitude']),
-          width: 30,
-          height: 30,
-          child: const Icon(Icons.location_on, color: Colors.red, size: 30),
+          width: 40,
+          height: 40,
+          child:
+              const Icon(Icons.location_pin, color: Colors.redAccent, size: 32),
         );
       }).toList();
 
   List<Marker> get routeMarkers => _routeSuggestions.map((route) {
         return Marker(
           point: LatLng(route['center_lat'], route['center_lon']),
-          width: 30,
-          height: 30,
-          child:
-              const Icon(Icons.directions_bus, color: Colors.green, size: 28),
+          width: 36,
+          height: 36,
+          child: const Icon(Icons.directions_bus_filled,
+              color: Colors.green, size: 30),
         );
       }).toList();
 
   List<Polyline> get routePolylines => _routePolylines.map((points) {
         return Polyline(
           points: points,
-          strokeWidth: 4.0,
-          color: Colors.blueAccent,
+          strokeWidth: 5.0,
+          color: Colors.deepPurpleAccent.withOpacity(0.8),
         );
       }).toList();
+
+  void _showError(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.red[700],
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
 
   Future<void> loadAllData() async {
     _isLoading = true;
@@ -66,7 +81,7 @@ class TransitProvider extends ChangeNotifier {
         loadAnalytics(),
       ]);
     } catch (e) {
-      _error = e.toString();
+      _showError("Stops did not load successfully");
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -77,7 +92,7 @@ class TransitProvider extends ChangeNotifier {
     try {
       _stops = await ApiService.getStops(limit: 100, includeDemand: true);
     } catch (e) {
-      _error = 'Error loading stops: $e';
+      _error = 'Error loading stops: \$e';
     }
   }
 
@@ -91,12 +106,12 @@ class TransitProvider extends ChangeNotifier {
       _currentDemand = await ApiService.predictDemand(
         stopId: stopId,
         hour: now.hour,
-        dayOfWeek: now.weekday - 1, // Monday = 0
+        dayOfWeek: now.weekday - 1,
         latitude: lat,
         longitude: lon,
       );
     } catch (e) {
-      _error = 'Error predicting demand: $e';
+      _error = 'Error predicting demand: \$e';
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -107,16 +122,15 @@ class TransitProvider extends ChangeNotifier {
     try {
       _routeSuggestions = await ApiService.suggestRoutes(maxRoutes: 20);
     } catch (e) {
-      _error = 'Error loading route suggestions: $e';
+      _error = 'Error loading route suggestions: \$e';
     }
   }
 
   Future<void> loadAnalytics() async {
     try {
       _analytics = await ApiService.getAnalytics();
-      print("LOADED ANALYTICS: $_analytics"); // ✅ Add this
     } catch (e) {
-      _error = 'Error loading analytics: $e';
+      _error = 'Error loading analytics: \$e';
     }
   }
 
@@ -136,7 +150,7 @@ class TransitProvider extends ChangeNotifier {
       final viability = route['viability'] ?? '';
       final passesDemand = demand >= _demandThreshold;
       final passesViability = _viabilityFilter == "All" ||
-          viability == "${_viabilityFilter} Viability";
+          viability == "\${_viabilityFilter} Viability";
       return passesDemand && passesViability;
     }).toList();
   }
@@ -144,5 +158,21 @@ class TransitProvider extends ChangeNotifier {
   void setRoutePolylines(List<List<LatLng>> shapePoints) {
     _routePolylines = shapePoints;
     notifyListeners();
+  }
+
+  Future<void> suggestRouteFromTo(
+      double startLat, double startLon, double endLat, double endLon) async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      _suggestedRoute = await ApiService.suggestRouteFromTo(
+          startLat, startLon, endLat, endLon);
+    } catch (e) {
+      _error = 'Error suggesting route: \$e';
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }
