@@ -141,7 +141,7 @@ class DemandResponse(BaseModel):
 
 class RouteRequest(BaseModel):
     max_routes: int = Field(default=5, ge=1, le=20)
-    min_demand_threshold: float = Field(default=30.0, ge=0, le=100)
+    min_demand_threshold: float = Field(default=5.0, ge=0, le=100)
 
 class RouteResponse(BaseModel):
     route_id: str

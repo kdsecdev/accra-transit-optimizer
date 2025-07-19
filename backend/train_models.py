@@ -2,9 +2,9 @@ import sys
 import os
 sys.path.append('backend')
 
-from backend.utils.data_processor import AccraGTFSProcessor
-from backend.models.demand_predictor import DemandPredictor
-from backend.models.route_optimizer import RouteOptimizer
+from utils.data_processor import AccraGTFSProcessor
+from models.demand_predictor import DemandPredictor
+from models.route_optimizer import RouteOptimizer
 import json
 
 def main():
@@ -12,7 +12,7 @@ def main():
     print("=== ACCRA TRANSIT OPTIMIZER - MODEL TRAINING ===")
     
     # Initialize processor
-    processor = AccraGTFSProcessor("data/gtfs/")
+    processor = AccraGTFSProcessor("../data/gtfs/")
     
     # Step 1: Data processing
     print("\n--- STEP 1: DATA PROCESSING ---")
@@ -55,7 +55,7 @@ def main():
     route_suggestions = route_optimizer.suggest_new_routes(demand_features)
     
     # Save route suggestions
-    with open('data/processed/route_suggestions.json', 'w') as f:
+    with open('../data/processed/route_suggestions.json', 'w') as f:
         json.dump(route_suggestions, f, indent=2, default=str)
     
     print("\n=== MODEL TRAINING COMPLETE ===")
