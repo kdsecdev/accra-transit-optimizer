@@ -1,46 +1,46 @@
 [
   {
-    "suggested_route_id": "new_route_S1000",
-    "center_lat": 5.534172996945348,
-    "center_lon": -0.2354450188047539,
-    "estimated_demand": 21.142857142857142,
-    "peak_hour": "12",
-    "coverage_stops": 7,
-    "priority_score": 148.0
+    "suggested_route_id": "new_route_S1001",
+    "center_lat": 5.535945646708589,
+    "center_lon": -0.2291757856477868,
+    "estimated_demand": 27.0,
+    "peak_hour": "8",
+    "coverage_stops": 10,
+    "priority_score": 270.0
   },
   {
-    "suggested_route_id": "new_route_S1001",
-    "center_lat": 5.534839993003651,
-    "center_lon": -0.22886839547413426,
-    "estimated_demand": 21.333333333333332,
-    "peak_hour": "13",
-    "coverage_stops": 3,
-    "priority_score": 64.0
+    "suggested_route_id": "new_route_S1000",
+    "center_lat": 5.534901226903879,
+    "center_lon": -0.2355350876865326,
+    "estimated_demand": 23.555555555555557,
+    "peak_hour": "18",
+    "coverage_stops": 9,
+    "priority_score": 212.0
   },
   {
     "suggested_route_id": "new_route_S100",
-    "center_lat": 5.53786939186633,
-    "center_lon": -0.4015263515101753,
-    "estimated_demand": 20.0,
-    "peak_hour": "14",
+    "center_lat": 5.538416659912951,
+    "center_lon": -0.3996839674639299,
+    "estimated_demand": 23.333333333333332,
+    "peak_hour": "12",
     "coverage_stops": 3,
-    "priority_score": 60.0
+    "priority_score": 70.0
   },
   {
-    "suggested_route_id": "new_route_S1003",
-    "center_lat": 5.538434277932282,
-    "center_lon": -0.2157882706576838,
+    "suggested_route_id": "new_route_S1005",
+    "center_lat": 5.543647509784929,
+    "center_lon": -0.2164331755523251,
     "estimated_demand": 20.0,
-    "peak_hour": "10",
+    "peak_hour": "7",
     "coverage_stops": 2,
     "priority_score": 40.0
   },
   {
-    "suggested_route_id": "new_route_S1007",
-    "center_lat": 5.546820575034986,
-    "center_lon": -0.21758069296092086,
+    "suggested_route_id": "new_route_S10",
+    "center_lat": 5.679989070478791,
+    "center_lon": -0.3495788179059614,
     "estimated_demand": 20.0,
-    "peak_hour": "15",
+    "peak_hour": "21",
     "coverage_stops": 1,
     "priority_score": 20.0
   }

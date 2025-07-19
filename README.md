@@ -1,4 +1,4 @@
-Great progress so far! Based on your upgraded Flutter frontend and hosted backend, here is an updated, professional `README.md` that reflects the full project scope with all recent improvements:
+ Great progress so far! Based on your upgraded Flutter frontend and hosted backend, here is an updated, professional `README.md` that reflects the full project scope with all recent improvements:
 
 ---
 
@@ -69,9 +69,10 @@ cd backend/
 python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
+python train_models.py
 uvicorn main:app --reload
 ```
-
+ 
 * API: [http://localhost:8000/docs](http://localhost:8000/docs)
 * Health: `/health`
 
